@@ -1,0 +1,32 @@
+{% if plan %}
+	<h1>{{plan.name}}</h1>
+	<table border="1">
+		<tr>
+			<td><b>cost</b></td>
+			<td>{{plan.cost}} RMB</td>
+		</tr>
+		<tr>
+			<td><b>saved money</b></td>
+			<td>{{plan.saved_money}}</td>
+		</tr>
+		<tr>
+			<td><b>due</b></td>
+			<td>{{plan.due}}</td>
+		</tr>
+	</table>
+	<table border='1'>
+		<tr>
+			<th>Saving Progress</th>
+		</tr>
+		{% if progress %}
+			{% for p in progress %}
+				<tr>p.date</tr>
+				<tr>p.money</tr>
+			{% endfor %}
+		{% else %}
+			<tr>
+				<td><b>No progress</b></td>
+			</tr>
+		{% endif %}
+	</table>
+{% endif %}
