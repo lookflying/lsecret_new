@@ -1,6 +1,6 @@
 {% if plan %}
 	<h1>{{plan.name}}</h1>
-	<table border="1">
+	<p><table border="1">
 		<tr>
 			<td><b>cost</b></td>
 			<td>{{plan.cost}} RMB</td>
@@ -13,20 +13,37 @@
 			<td><b>due</b></td>
 			<td>{{plan.due}}</td>
 		</tr>
-	</table>
-	<table border='1'>
-		<tr>
-			<th>Saving Progress</th>
-		</tr>
-		{% if progress %}
-			{% for p in progress %}
-				<tr>p.date</tr>
-				<tr>p.money</tr>
+	</table></p>
+
+	<p><form action="/saving_plan/{{ plan.id }}/add_progress/" method="post">{% csrf_token %}
+		<table border='1'>
+			<tr><b>Add Progress</b></tr>
+			<tr>
+				<td>Money</td>
+				<td><input type="text" name="money" id="money" value=""/></td>
+				<td><input type="submit" value="Add"/></td>
+			</tr>
+		</table>
+	</form>	</p>
+
+	<p><table border='1'>
+		<tr><b>Saving Progress</b></tr>
+		{% if progress_list %}
+			<tr>
+				<th>Date</th>
+				<th>Money</th>
+			</tr>
+			{% for p in progress_list %}
+				<tr>
+					<td>{{p.date}}</td>
+					<td>{{p.money}}</td>
+				</tr>
 			{% endfor %}
 		{% else %}
 			<tr>
 				<td><b>No progress</b></td>
 			</tr>
 		{% endif %}
-	</table>
+	</table></p>
+
 {% endif %}

@@ -21,6 +21,7 @@ urlpatterns = patterns('',
 				template_name='saving_plan/index.html')),
 #	url(r'^saving_plan/$', 'saving_plan.views.index'),
 	url(r'^saving_plan/(?P<plan_id>\d+)/$', 'saving_plan.views.detail'),
+	url(r'^saving_plan/(?P<plan_id>\d+)/add_progress/$', 'saving_plan.views.add_progress'),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )
