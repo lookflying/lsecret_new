@@ -1,9 +1,16 @@
 {% if plan_list %}
 	<ul>
-	{% for plan in plan_list %}
-		<li><a href="/saving_plan/{{ plan.id }}/">{{ plan.name }}</a></li>
+		<table border='1'>
+			<tr>
+				<th><b>Saving Plan</b></th>
+			</tr>
+		{% for plan in plan_list %}
+			<tr>
+				<td><li><a href="/saving_plan/{{ plan.id }}/">{{ plan.name }}</a></li></td>
+			</tr>
+		{% endfor %}
+		</table>
 	</ul>
-	{% endfor %}
 {% else %}
 	<p>No Plan exists.</p>
 {% endif %}
