@@ -5,7 +5,7 @@ class SavingPlan(models.Model):
 		name = models.CharField(max_length=255)
 		cost = models.IntegerField()
 		create_time = models.DateTimeField("create time", default=timezone.now())
-		due = models.DateTimeField('due date')
+		due = models.DateField('due date')
 		saved_money = models.IntegerField(default=0)
 		last_progress_time = models.DateTimeField("last progress time", default=timezone.now())
 		last_calc_time = models.DateTimeField("last calculate time", default=timezone.now())
@@ -35,6 +35,6 @@ class SavingPlan(models.Model):
 class SavingProgress(models.Model):
 		plan = models.ForeignKey(SavingPlan)
 		money = models.IntegerField()
-		date = models.DateTimeField('progress date', default=timezone.now())
+		date = models.DateField('progress date', auto_now=True)
 		def __unicode__(self):
 				return "RMB:" + self.money.__str__() + "\t" + self.date.__str__()
