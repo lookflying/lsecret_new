@@ -9,10 +9,28 @@ class SavingPlan(models.Model):
 		saved_money = models.IntegerField(default=0)
 		last_progress_time = models.DateTimeField("last progress time", default=timezone.now())
 		last_calc_time = models.DateTimeField("last calculate time", default=timezone.now())
+
 		def __unicode__(self):
 				return self.name
 
-
+		def status(self):
+			self.calc_saved_money()
+			if self.saved_money >= self.cost:
+				return "Completed"
+			elif timezone.now() < self.due:
+				return "In Progress"
+			else:
+				return "Over Due"
+				
+		def calc_saved_money(self):
+			if self.last_calc_time < self.last_progress_time:
+				progress_list = SavingProgress.objects.filter(plan=self.id)
+				saved_money = 0
+				for progress in progress_list:
+					saved_money += progress.money
+				self.saved_money = saved_money
+				self.last_calc_time = timezone.now()
+				self.save()
 
 class SavingProgress(models.Model):
 		plan = models.ForeignKey(SavingPlan)

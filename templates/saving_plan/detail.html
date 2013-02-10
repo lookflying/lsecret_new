@@ -2,25 +2,34 @@
 	<h1>{{plan.name}}</h1>
 	<p><table border="1">
 		<tr>
-			<td><b>cost</b></td>
-			<td>{{plan.cost}} RMB</td>
+			<td><b>Cost</b></td>
+			<td>{{ plan.cost }} RMB</td>
 		</tr>
 		<tr>
-			<td><b>saved money</b></td>
-			<td>{{plan.saved_money}}</td>
+			<td><b>Saved Money</b></td>
+			<td>{{ plan.saved_money }}</td>
 		</tr>
 		<tr>
-			<td><b>due</b></td>
-			<td>{{plan.due}}</td>
+			<td><b>Due</b></td>
+			<td>{{ plan.due }}</td>
+		</tr>
+		<tr>
+			<td><b>Status</b></td>
+			<td>{{ plan.status }}</td>
+		</tr>
+		<tr>
+			<td><b>Create Time</b></td>
+			<td>{{ plan.create_time }}</td>
 		</tr>
 	</table></p>
 
-	<p><form action="/saving_plan/{{ plan.id }}/add_progress/" method="post">{% csrf_token %}
+	<p><form action="/saving_plan/{{ plan.id }}/add_progress/" method="post">
+	{% csrf_token %}
 		<table border='1'>
 			<tr><b>Add Progress</b></tr>
 			<tr>
-				<td>Money</td>
-				<td><input type="text" name="money" id="money" value=""/></td>
+				<td><b>Money</b></td>
+				<td><input type="number" name="money" id="money" value="0"/></td>
 				<td><input type="submit" value="Add"/></td>
 			</tr>
 		</table>
@@ -35,8 +44,12 @@
 			</tr>
 			{% for p in progress_list %}
 				<tr>
-					<td>{{p.date}}</td>
-					<td>{{p.money}}</td>
+					<form action="/saving_plan/{{ plan.id }}/delete_progress/{{ p.id }}/" method="post">
+					{% csrf_token %} 
+						<td>{{p.date}}</td>
+						<td>{{p.money}}</td>
+						<td><input type="submit" value="Delete"/></td>
+					</form>
 				</tr>
 			{% endfor %}
 		{% else %}

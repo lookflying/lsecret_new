@@ -1,12 +1,41 @@
+<p><form action="/saving_plan/add/" method="post">
+{% csrf_token %}
+	<table border='1'>
+		<b>Add Plan</b>
+		<tr>
+			<td><b>Name</b></td>
+			<td><input type="text" name="name" /></td>
+		</tr>
+		<tr>
+			<td><b>Cost</b></td>
+			<td><input type="number" name="cost" min="0" value="0" /></td>
+		</tr>
+		<tr>
+			<td><b>Due</b></td>
+			<td><input type="date" name="due" /></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="Add"/></td>
+		</tr>
+	</table>
+</form></p>
+
 {% if plan_list %}
 	<ul>
 		<table border='1'>
+			<b>Saving Plan</b>
 			<tr>
-				<th><b>Saving Plan</b></th>
+				<th><b>Name</b></th>
+				<th><b>Status</b></th>
 			</tr>
 		{% for plan in plan_list %}
 			<tr>
 				<td><li><a href="/saving_plan/{{ plan.id }}/">{{ plan.name }}</a></li></td>
+				<td>{{ plan.status }}</td>
+				<td><form action="/saving_plan/{{ plan.id }}/delete/" method="post">
+				{% csrf_token %}
+				<input type="submit" value="Delete"/>
+				</form></td>
 			</tr>
 		{% endfor %}
 		</table>
