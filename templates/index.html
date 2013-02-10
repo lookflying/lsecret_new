@@ -1,0 +1,16 @@
+{% if account_list %}
+	<table>
+		<tr>
+			<th><b>User Name</b></th>
+			<th><b>Income</b></th>
+			<th><b>Expense</b></th>
+			<th><b>Balance</b></th>
+		</tr>
+		{% for account in account_list %}
+		<tr>
+			<td>{{ account.username }}</td>
+		</tr>
+		{% endfo %}
+	</table>
+{% endif %}
+
