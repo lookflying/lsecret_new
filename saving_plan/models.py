@@ -13,15 +13,6 @@ class SavingPlan(models.Model):
 		def __unicode__(self):
 				return self.name
 
-		def status(self):
-			self.calc_saved_money()
-			if self.saved_money >= self.cost:
-				return "Completed"
-			elif timezone.now() < self.due:
-				return "In Progress"
-			else:
-				return "Over Due"
-
 		def calc_saved_money(self):
 			if self.last_calc_time < self.last_progress_time:
 				progress_list = SavingProgress.objects.filter(plan=self.id)
@@ -31,6 +22,15 @@ class SavingPlan(models.Model):
 				self.saved_money = saved_money
 				self.last_calc_time = timezone.now()
 				self.save()
+
+		def status(self):
+			self.calc_saved_money()
+			if self.saved_money >= self.cost:
+				return "Completed"
+			elif timezone.now().date() <= self.due:
+				return "In Progress"
+			else:
+				return "Over Due"
 
 class SavingProgress(models.Model):
 		plan = models.ForeignKey(SavingPlan)
