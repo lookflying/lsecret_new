@@ -25,6 +25,9 @@ urlpatterns = patterns('',
     url(r'^saving_plan/(?P<plan_id>\d+)/delete_progress/(?P<progress_id>\d+)/$', 'saving_plan.views.delete_progress'),
 	url(r'^saving_plan/add/', 'saving_plan.views.add_plan'),
 	url(r'^saving_plan/(?P<plan_id>\d+)/delete/$', 'saving_plan.views.delete_plan'),
+	url(r'^account/(?P<account_id>\d+)/$', 'account.views.view_account'),
+	url(r'^account/(?P<account_id>\d+)/add_event/$', 'account.views.add_event'),
+	url(r'^event/(?P<event_id>\d+)/$', 'account.views.process_event'),
 	# Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )

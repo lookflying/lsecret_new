@@ -23,4 +23,4 @@ class AccountEvent(models.Model):
 				return income - expense
 		
 		def __unicode__(self):
-				return self.name
+				return self.item
